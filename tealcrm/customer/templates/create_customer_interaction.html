@@ -3,25 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Interaction</title>
+    <title>Add Interaction | TealCRM</title>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(120deg, #f3f7fa, #ffffff);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #00796b;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-top: 15px;
+        }
+
+        select, textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .btn-success {
+            background-color: #00796b;
+            border: none;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-success:hover {
+            background-color: #004d40;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #00796b;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-    <h1>Add Interaction for {{ customer.name }}</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="interaction_type">Interaction Type:</label>
-        <select name="interaction_type" id="interaction_type" required>
-            <option value="Call">Call</option>
-            <option value="Email">Email</option>
-            <option value="Meeting">Meeting</option>
-            <option value="Other">Other</option>
-        </select>
-        <br>
-        <label for="notes">Notes:</label>
-        <textarea name="notes" id="notes" rows="4" required></textarea>
-        <br>
-        <button type="submit" class="btn btn-success">Add Interaction</button>
-    </form>
+
+    <div class="container">
+        <div class="header">
+            <h1>Add Interaction</h1>
+            <p>For: <strong>{{ customer.name }}</strong></p>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="interaction_type">Interaction Type:</label>
+            <select name="interaction_type" id="interaction_type" required>
+                <option value="Call">Call</option>
+                <option value="Email">Email</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="notes">Notes:</label>
+            <textarea name="notes" id="notes" rows="4" placeholder="Enter interaction notes..." required></textarea>
+
+            <button type="submit" class="btn btn-success">Add Interaction</button>
+        </form>
+        <a href="{% url 'customer_dashboard' %}" class="back-link">&larr; Back to Dashboard</a>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 TealCRM. All Rights Reserved.
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
