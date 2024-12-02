@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Detail | TealCRM</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <style>
+        body {
+            background: #ffffff; /* White background */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        h2 {
+            font-size: 30px;
+            font-weight: bold;
+            color: #00796b; /* Teal color for consistency */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+        }
+
+        .card-header {
+            background: #00796b; /* Consistent teal color */
+            color: #fff;
+            font-size: 20px;
+            padding: 15px;
+            font-weight: 500;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+        }
+
+        .card-body {
+            padding: 25px;
+            color: #444;
+            background: #f9f9f9;
+        }
+
+        .card-title {
+            font-size: 22px;
+            color: #00796b; /* Teal color */
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-text {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            padding: 8px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn-primary, .btn-secondary {
+            font-size: 16px;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #00796b; /* Teal color */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #004d40; /* Darker teal for hover */
+        }
+
+        .btn-secondary {
+            background-color: #b0bec5; /* Grayish color */
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #78909c; /* Darker gray for hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Support Ticket Details</h2>
+
+        <!-- Ticket Info -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-ticket-alt"></i> <strong>Ticket ID:</strong> {{ ticket.id }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ ticket.title }}</h5>
+                <p class="card-text">{{ ticket.description }}</p>
+
+                <div class="info-row">
+                    <span><strong>Status:</strong> {{ ticket.status }}</span>
+                    <span><strong>Created on:</strong> {{ ticket.created_at }}</span>
+                </div>
+
+                <div class="info-row">
+                    <span><strong>Customer:</strong> {{ ticket.customer.username }}</span>
+                    <span><strong>Email:</strong> {{ ticket.customer.email }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'ticket_list' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back to Ticket List</a>
+            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i> Edit Ticket</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

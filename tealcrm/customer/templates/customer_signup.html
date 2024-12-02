@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Signup</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: 50px;
+        }
+
+        .container:hover {
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #2e3b44;
+            font-size: 30px;
+            margin-bottom: 24px;
+            font-family: 'Verdana', sans-serif;
+        }
+
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+            display: block;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #2e3b44;
+            outline: none;
+        }
+
+        button {
+            background-color: #2e3b44;
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2e3b44;
+        }
+
+        .error {
+            color: #ff6f61;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .link-text {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .link-text a {
+            color: #2e3b44;
+            text-decoration: none;
+        }
+
+        .link-text a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar {
+            width: 100%;
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            padding: 20px 30px;
+            top: 0;
+            position: fixed;
+        }
+
+        .navbar .navbar-nav {
+            margin-left: auto;
+            text-align: end;
+
+        }
+
+        .navbar .nav-link {
+            color: white !important;
+            font-weight: bold;
+              padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="navbar-nav ml-auto">
+            <a class="nav-link" href="{% url 'home' %}">Home</a>
+            <a class="nav-link" href="{% url 'AboutUs' %}">AboutUs</a>
+            <a class="nav-link" href="{% url 'ContactUs' %}">ContactUs</a>
+            <a class="nav-link" href="{% url 'services' %}">Services</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h2>Customer Signup</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Confirm Password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Re-enter your password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <p class="link-text">Already have an account? <a href="{% url 'customer_login' %}">Login here</a></p>
+    </div>
+</body>
+</html>

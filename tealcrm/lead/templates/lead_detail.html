@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lead Details - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f1f5f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 800px;
+        }
+        .lead-header {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+        .lead-header h2 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .lead-header p {
+            font-size: 1.1em;
+        }
+        .section {
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+        h3 {
+            color: #2e3b44;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .task-item, .interaction-item {
+            background: #f9fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2e3b44;
+            margin-bottom: 15px;
+        }
+        .task-item p, .interaction-item p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .task-title, .interaction-title {
+            font-weight: bold;
+            color: #2e3b44;
+        }
+        .task-status {
+            font-weight: bold;
+            color: #444;
+            font-size: 0.9em;
+        }
+        .no-items {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+        }
+        .btn-primary, .btn-outline-primary, .btn-danger, .btn-success {
+            border: none;
+            color: #ffffff;
+            font-weight: bold;
+            transition: background 0.3s;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        .btn-primary {
+            background-color: #4caf50;
+        }
+        .btn-primary:hover {
+            background-color: #2e3b44;
+        }
+        .btn-outline-primary {
+            background-color: #3b87c5;
+        }
+        .btn-outline-primary:hover {
+            background-color: #2e3b44;
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-success {
+            background-color: #4caf50;
+        }
+        .btn-success:hover {
+            background-color: #388e3c;
+        }
+        .task-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+        }
+        .task-actions a {
+            margin: 0 5px;
+        }
+
+        /* Updated Styling for Interactions Section */
+        .interaction-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .interaction-item {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .interaction-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .interaction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .interaction-date {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .interaction-notes {
+            color: #555;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        .no-items {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Lead Header Section -->
+    <div class="lead-header">
+        <h2>{{ lead.first_name }} {{ lead.last_name }}</h2>
+        <p><strong>Email:</strong> {{ lead.email }}</p>
+        <p><strong>Phone:</strong> {{ lead.phone|default:"N/A" }}</p>
+        <p><strong>Company:</strong> {{ lead.company|default:"N/A" }}</p>
+        <p><strong>Status:</strong> {{ lead.get_status_display }}</p>
+        <p><strong>Assigned To:</strong> {{ lead.assigned_to.username|default:"Unassigned" }}</p>
+    </div>
+
+    <!-- Tasks Section -->
+    <div class="section">
+        <h3>Pending Tasks</h3>
+        {% if tasks %}
+            {% for task in tasks %}
+                <div class="task-item">
+                    <p class="task-title">{{ task.title }}</p>
+                    <p>Due: {{ task.due_date }}</p>
+                    <p class="task-status">{{ task.completed|yesno:"Completed,Pending" }}</p>
+                    <div class="task-actions">
+                        <a href="{% url 'lead_edit_task' lead.id task.id %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'lead_delete_task' lead.id task.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-items">No pending tasks available.</p>
+        {% endif %}
+        <div class="action-buttons">
+            <a href="{% url 'create_task' lead.id %}" class="btn btn-outline-primary">Add Task</a>
+        </div>
+    </div>
+
+    <!-- Interactions Section -->
+    <div class="section">
+        <h3>Interactions</h3>
+        {% if interactions %}
+            <div class="interaction-list">
+                {% for interaction in interactions %}
+                    <div class="interaction-item">
+                        <div class="interaction-header">
+                            <span class="interaction-date">{{ interaction.date }}</span>
+                            <a href="{% url 'delete_interaction' lead.id interaction.id %}" class="btn btn-danger btn-sm delete-btn">Delete</a>
+                        </div>
+                        <p class="interaction-notes">{{ interaction.notes }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-items">No interactions yet. Add an interaction to get started!</p>
+        {% endif %}
+        <div class="action-buttons">
+            <a href="{% url 'create_interaction' lead.id %}" class="btn btn-success">Add Interaction</a>
+        </div>
+    </div>
+
+    <!-- Additional Actions Section -->
+    <div class="action-buttons">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>
+</body>
+</html>

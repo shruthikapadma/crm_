@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* General page styling */
+        body {
+           background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            color: #333;
+            font-family: Arial, sans-serif;
+            padding-top: 80px;
+        }
+
+        /* Header styling */
+        .navbar {
+            background-color: #2e3b44;
+            box-shadow: 0 4px 8px rgb(255, 255, 255);
+            padding: 15px;
+        }
+        .navbar .navbar-brand {
+            color:#ffffff;
+            font-weight: bold;
+        }
+        .navbar .nav-link {
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .navbar .nav-link:hover {
+            color:#45a049;
+        }
+
+        /* Header content */
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color:#2e3b44;
+        }
+        header h1 {
+            font-size: 2.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #2e3b44;
+            margin-bottom: 2rem;
+        }
+
+        /* Service card styling */
+        .service-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgb(255, 255, 255);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .service-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .service-card-body {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-card-body h5 {
+            color: #2e3b44;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .service-card-body p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: #ffffff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <a class="navbar-brand" href="#">TealCRM</a>
+    <!-- Hamburger Icon for mobile view -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'AboutUs' %}">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'ContactUs' %}">Contact Us</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'analytics' %}">Analytics</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<header>
+    <h1>Our Services</h1>
+    <p>Discover the wide range of services we offer to help you manage your business efficiently.</p>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://orgzit.com/blog/wp-content/uploads/2020/03/What-is-Lead-Management_-1024x544.png" alt="Lead Management">
+                <div class="service-card-body">
+                    <h5>Lead Management</h5>
+                    <p>Manage and track your leads with our robust CRM system, designed to boost your sales efficiency.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://beslick.com/wp-content/uploads/2024/06/AdobeStock_599111162-scaled.jpeg" alt="Task Automation">
+                <div class="service-card-body">
+                    <h5>Task Automation</h5>
+                    <p>Automate repetitive tasks to free up time for more important activities, enhancing productivity.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://www.aimtechnologies.co/wp-content/uploads/2024/01/Customer-Insights.png" alt="Customer Insights">
+                <div class="service-card-body">
+                    <h5>Customer Insights</h5>
+                    <p>Gain valuable insights into customer behavior, helping you make data-driven business decisions.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://www.rib-software.com/app/uploads/2024/06/call-center-customer-support-dashboard.webp" alt="Custom Reports">
+                <div class="service-card-body">
+                    <h5>Custom Reports</h5>
+                    <p>Create customized reports to analyze your business metrics and performance effectively.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPMr28Z6phKLxJePCAAtPvNDbgbboPQy2P-Q&s" alt="Email Integration">
+                <div class="service-card-body">
+                    <h5>Email Integration</h5>
+                    <p>Integrate your email services for streamlined communication with leads and customers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4 d-flex">
+            <div class="card service-card">
+                <img src="https://snacknation.com/wp-content/uploads/2019/08/Online-Collaboration-Tools-1.png" alt="Collaboration Tools">
+                <div class="service-card-body">
+                    <h5>Collaboration Tools</h5>
+                    <p>Enhance teamwork with built-in collaboration tools designed for CRM efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 TealCRM. All Rights Reserved.</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

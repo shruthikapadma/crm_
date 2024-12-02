@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Interaction - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Background and Container Styling */
+        body {
+            background-color: #f5f8fa;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            margin-top: 60px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            font-size: 28px;
+            color: #2e3b44;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        .form-group label {
+            color: #333;
+            font-weight: 500;
+        }
+        input[type="text"],
+        textarea {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #2e3b44;
+            outline: none;
+        }
+
+        /* Button Styling */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn-success {
+            background-color: #45a049;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #2e3b44;
+        }
+        .btn-secondary {
+            background-color: red;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color:  #45a049;
+        }
+        .btn-info {
+            background-color:  #45a049;
+            border: none;
+        }
+        .btn-info:hover {
+            background-color: #2e3b44;
+        }
+
+        /* Footer Button Alignment */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Create New Interaction</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="button-group">
+            <button type="submit" class="btn btn-success">Save Interaction</button>
+            <a href="{% url 'lead_detail' lead.id %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'dashboard' %}" class="btn btn-info">Go to Dashboard</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

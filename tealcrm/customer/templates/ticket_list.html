@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Support Tickets</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #2e3b44;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            color: white;
+            margin-left: 20px;
+            font-size: 1.5rem;
+        }
+
+        nav {
+            margin-right: 20px;
+        }
+
+        nav a {
+            background-color: #45a049;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 0 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #3a8c40;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2e3b44;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #45a049;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #3a8c40;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th,
+        table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        table td a {
+            color: #2e3b44;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        table td a:hover {
+            color: #45a049;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.5rem;
+            }
+            .btn {
+                font-size: 0.9rem;
+                padding: 8px 16px;
+            }
+            table {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Support Tickets</h1>
+        <nav>
+            <a href="{% url 'customer_dashboard' %}">Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Your Support Tickets</h2>
+        <a href="{% url 'create_ticket' %}" class="btn">Create New Ticket</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Updated</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.title }}</td>
+                        <td>{{ ticket.get_status_display }}</td>
+                        <td>{{ ticket.created_at|date:"Y-m-d H:i" }}</td>
+                        <td>{{ ticket.updated_at|date:"Y-m-d H:i" }}</td>
+                        <td><a href="{% url 'ticket_detail' ticket.id %}">View</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-message">No support tickets found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

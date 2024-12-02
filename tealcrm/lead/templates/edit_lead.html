@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Lead</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+        }
+        h2 {
+            color: #2e3b44;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input, .form-group select {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #2e3b44;
+            box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+        }
+        .btn-primary {
+            background-color: #2e3b44;
+            border-color: #2e3b44;
+            color: #f9f9f9;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+        .btn-primary:hover {
+            background-color: #2e3b44;
+            border-color: #2e3b44;
+        }
+        .btn-secondary {
+            color: #555;
+            border-color: #ddd;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-secondary:hover {
+            background-color: #eee;
+        }
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            border-radius: 5px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            background-color: #2e3b44;
+            color: #f9f9f9;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header a {
+            color: #f9f9f9;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h3>TealCRM</h3>
+        <nav>
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'AboutUs' %}">About Us</a>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'ContactUs' %}">Contact Us</a>
+        </nav>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Edit Lead</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">{{ form.first_name.label }}</label>
+                {{ form.first_name }}
+            </div>
+            <div class="form-group">
+                <label for="last_name">{{ form.last_name.label }}</label>
+                {{ form.last_name }}
+            </div>
+            <div class="form-group">
+                <label for="email">{{ form.email.label }}</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="phone">{{ form.phone.label }}</label>
+                {{ form.phone }}
+            </div>
+            <div class="form-group">
+                <label for="company">{{ form.company.label }}</label>
+                {{ form.company }}
+            </div>
+            <div class="form-group">
+                <label for="status">{{ form.status.label }}</label>
+                {{ form.status }}
+            </div>
+            <div class="form-group">
+                <label for="assigned_to">{{ form.assigned_to.label }}</label>
+                {{ form.assigned_to }}
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Update Lead</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

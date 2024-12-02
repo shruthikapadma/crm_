@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Customer for Interaction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Style */
+        header {
+            background-color: #00796b;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        header .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .cta-button {
+            text-decoration: none;
+            padding: 8px 20px;
+            background: #ffffff;
+            color: #00796b;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        header .cta-button:hover {
+            background: #004d40;
+            color: white;
+        }
+
+        /* Container Style */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Customer List Style */
+        .customer-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .customer-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .customer-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .customer-item span {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .cta-button {
+            text-decoration: none;
+            padding: 10px 20px;
+            background: #00796b;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: #004d40;
+        }
+
+        .action-button {
+            margin-left: 15px;
+            padding: 10px 20px;
+            background: #4caf50;
+            color: white;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .action-button:hover {
+            background: #388e3c;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <strong>TealCRM</strong>
+            </div>
+            <a href="{% url 'customer_dashboard' %}" class="cta-button">Go to Dashboard</a>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <h1>Select Customer for Interaction</h1>
+        <ul class="customer-list">
+            {% for customer in customers %}
+            <li class="customer-item">
+                <span>{{ customer.name }} - {{ customer.city }}</span>
+                <div>
+                    <a href="{% url 'view_customer_interaction' customer.id %}" class="action-button">View Interaction</a>
+                    <a href="{% url 'create_customer_interaction' customer.id %}" class="cta-button">Add Interaction</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <style>
+        /* General reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            padding-top: 90px;
+            color: #333;
+        }
+
+        /* Header Styling */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-bottom: 4px solid #3d4c57;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-right: auto;
+            letter-spacing: 1px;
+        }
+
+        .welcome-message {
+            font-size: 18px;
+            margin-right: 30px;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-buttons a {
+            margin-left: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .header-buttons a:hover {
+            background-color: #45a049;
+        }
+
+        /* Hamburger Button */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 4px;
+            margin: 5px;
+            background-color: white;
+            border-radius: 4px;
+        }
+
+        /* Media Query for Small Screens */
+        @media screen and (max-width: 768px) {
+            .header-buttons {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-top: 20px;
+                position: absolute;
+                top: 70px;
+                right: 10px;
+                background-color: #3d4c57;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 200px;
+                transition: all 0.3s ease;
+            }
+
+            .header-buttons.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        .dashboard-title {
+            color: #2e3b44;
+            font-size: 36px;
+            font-weight: bold;
+            margin: 30px 0 20px;
+            text-align: center;
+        }
+
+        .dashboard-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding-bottom: 30px;
+        }
+
+        .section, .ticket-section {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            width: 45%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .section:hover, .ticket-section:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h3, .ticket-section h3 {
+            font-size: 22px;
+            color: #2e3b44;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .cta-button {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #004d40;
+        }
+
+        .cta-button.delete {
+            background-color: #d32f2f;
+        }
+
+        .cta-button.delete:hover {
+            background-color: #c62828;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #2b3a42;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #ffffff;
+            margin: 0 5px;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>TealCRM Dashboard</h1>
+        <p class="welcome-message">Welcome back, {{ user.username }}!</p>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="header-buttons">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'AboutUs' %}">About Us</a>
+            <a href="{% url 'create_ticket' %}">Create Ticket</a>
+            <a href="{% url 'create_customer' %}">Add New Customer</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <main>
+        <h2 class="dashboard-title">Your Customer Management Hub</h2>
+
+        <div class="dashboard-section">
+            {% for detail in details %}
+                <div class="section">
+                    <h3>Customer Overview</h3>
+                    <p><strong>Name:</strong> {{ detail.name }}</p>
+                    <p><strong>City:</strong> {{ detail.city }}</p>
+                    <p><strong>State:</strong> {{ detail.state }}</p>
+                    <p><strong>Country:</strong> {{ detail.country }}</p>
+                    <p><strong>Phone:</strong> {{ detail.phone }}</p>
+
+                    <!-- Edit, Delete, and Assign Task Buttons -->
+                    <div class="action-buttons">
+                        <a href="{% url 'edit_customer' detail.id %}" class="cta-button">Edit</a>
+                        <a href="{% url 'delete_customer' detail.id %}" class="cta-button delete">Delete</a>
+                        <a href="{% url 'add_task' detail.id %}" class="cta-button">Assign Task</a>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Interaction Section -->
+            <div class="section">
+                <h3>Customer Interactions</h3>
+                <p>Manage interactions for your customers below:</p>
+                <a href="{% url 'select_customer_for_interaction' %}" class="cta-button">Add Interaction</a>
+            </div>
+
+            <div class="ticket-section">
+                <h3>Support Tickets</h3>
+                <p>Manage your support tickets below:</p>
+                <a href="{% url 'ticket_list' %}" class="cta-button">View All Tickets</a>
+
+                {% for ticket in tickets %}
+                    <div class="section">
+                        <p><strong>Title:</strong> {{ ticket.title }}</p>
+                        <p><strong>Status:</strong> {{ ticket.status }}</p>
+                        <div class="action-buttons">
+                            <a href="{% url 'ticket_detail' ticket.id %}" class="cta-button">View Details</a>
+                            <a href="{% url 'edit_ticket' ticket.id %}" class="cta-button">Edit</a>
+                            <a href="{% url 'delete_ticket' ticket.id %}" class="cta-button delete">Delete</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No support tickets found.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 TealCRM. All Rights Reserved.</p>
+        <p>
+            <a href="https://www.facebook.com" target="_blank">Facebook</a> |
+            <a href="https://www.twitter.com" target="_blank">Twitter</a> |
+            <a href="https://www.instagram.com" target="_blank">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.querySelector('.header-buttons');
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>

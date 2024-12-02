@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Details | TealCRM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    
+    <style>
+        body {
+            background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            font-family: 'Arial', sans-serif;
+            padding-top: 70px;
+        }
+
+        .header {
+            background-color: #00796b;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            top: 0;
+            width: 100%;
+            position: fixed;
+            
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        .header .nav-links a {
+            color: white;
+            margin-left: 20px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .header .nav-links a:hover {
+            color: #cfd8dc;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .task-card h3 {
+            color: #00796b;
+        }
+
+        .task-card p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .task-card .btn-back {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #00796b;
+            color: white;
+            border: none;
+        }
+
+        .task-card .btn-back:hover {
+            background-color: #004d40;
+        }
+
+        .completed-yes {
+            color: #28a745;
+        }
+
+        .completed-no {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Task Details</h1>
+        <div class="nav-links">
+            <a href="{% url 'customer_dashboard' %}">Customer Dashboard</a>
+           
+        </div>
+    </div>
+
+    <!-- Task Details Section -->
+    <div class="container">
+        <div class="task-card">
+            <h3>{{ task.title }}</h3>
+            <p><strong>Description:</strong> {{ task.description }}</p>
+            <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+            <p><strong>Completed:</strong> 
+                <span class="{% if task.completed %}completed-yes{% else %}completed-no{% endif %}">
+                    {% if task.completed %}Yes{% else %}No{% endif %}
+                </span>
+            </p>
+
+            <!-- Back to Task List Button -->
+            <a href="{% url 'task_list' customer_id=customer_id %}" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Back to Task List
+            </a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

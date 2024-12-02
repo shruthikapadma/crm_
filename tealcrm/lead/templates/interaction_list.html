@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactions List - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Interactions</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Notes</th>
+                <th>Lead</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for interaction in interactions %}
+            <tr>
+                <td>{{ interaction.interaction_type }}</td>
+                <td>{{ interaction.date }}</td>
+                <td>{{ interaction.notes }}</td>
+                <td>{{ interaction.lead.first_name }} {{ interaction.lead.last_name }}</td>
+                <td>
+                    <a href="{% url 'edit_interaction' interaction.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'delete_interaction' interaction.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">No interactions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'create_interaction' lead.id %}" class="btn btn-primary">Add Interaction</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interaction Detail - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Interaction Detail</h2>
+    <p><strong>Type:</strong> {{ interaction.interaction_type }}</p>
+    <p><strong>Date:</strong> {{ interaction.date }}</p>
+    <p><strong>Notes:</strong> {{ interaction.notes }}</p>
+
+    <h4>Replies</h4>
+    {% for reply in replies %}
+        <div class="card mb-2">
+            <div class="card-body">
+                <p>{{ reply.reply_text }}</p>
+                <small class="text-muted">Replied at {{ reply.replied_at }}</small>
+            </div>
+        </div>
+    {% empty %}
+        <p>No replies yet.</p>
+    {% endfor %}
+
+     <h5>Reply to this interaction:</h5>
+        <form method="post" action="{% url 'create_reply' interaction.id %}">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Submit Reply</button>
+    </form>
+    <a href="{% url 'lead_detail' interaction.lead.id %}" class="btn btn-secondary mt-3">Back to Lead</a>
+</div>
+</body>
+</html>

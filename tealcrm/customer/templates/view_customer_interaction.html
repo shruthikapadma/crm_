@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Interactions - {{ customer.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .cta-button {
+            text-decoration: none;
+            padding: 8px 15px;
+            background: #00796b;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: #004d40;
+        }
+
+        .interaction-header {
+            background-color: #00796b;
+            color: white;
+            padding: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .interaction-details {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .interaction-table th, .interaction-table td {
+            text-align: center;
+        }
+
+        .interaction-table {
+            margin-top: 20px;
+        }
+
+        .interaction-table td {
+            vertical-align: middle;
+        }
+
+        .btn-custom {
+            margin-right: 10px;
+        }
+
+        .no-interactions {
+            font-style: italic;
+            color: #888;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .interaction-table td {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+
+        <!-- Back Button -->
+        <a href="{% url 'select_customer_for_interaction' %}" class="cta-button mb-3">Back to Interaction List</a>
+
+        <!-- Interaction Details Section -->
+        <div class="interaction-details">
+            <div class="interaction-header">
+                <h4>Interaction Details for {{ customer.name }}</h4>
+            </div>
+
+            <!-- Interactions Table -->
+            <table class="table table-bordered interaction-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Interaction Type</th>
+                        <th>Notes</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for interaction in interactions %}
+                    <tr>
+                        <td>{{ interaction.date }}</td>
+                        <td>{{ interaction.interaction_type }}</td>
+                        <td>{{ interaction.notes }}</td>
+                        <td>
+                            <!-- Edit and Delete buttons for each interaction -->
+                            <a href="{% url 'customer_edit_interaction' customer.id interaction.id %}" class="btn btn-warning btn-custom">Edit</a>
+                            <a href="{% url 'customer_delete_interaction' customer.id interaction.id %}" class="btn btn-danger btn-custom">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center no-interactions">No interactions available for this customer.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

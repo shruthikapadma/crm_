@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #ffffff; /* White background */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        .header {
+            background: #2b3a42; /* Updated color */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .header-nav {
+            display: flex;
+            gap: 10px;
+            background: #444;
+            padding: 10px 15px;
+            border-radius: 10px;
+        }
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .header-nav a:hover {
+            background: #555;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        .card h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #e65c55;
+        }
+        .btn-secondary {
+            transition: 0.3s;
+        }
+        .btn-secondary:hover {
+            background-color: #666;
+            color: #fff;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+        .form-control {
+            border-radius: 8px;
+        }
+        .alert {
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>TealCRM</h1>
+        <div class="header-nav">
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+            <h2>Edit Task</h2>
+
+            <!-- Display errors if there are any validation issues -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <!-- Task Edit Form -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ form.title.value }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" rows="4" required>{{ form.description.value }}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="due_date">Due Date</label>
+                    <input type="date" class="form-control" id="due_date" name="due_date" value="{{ form.due_date.value }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="completed">Status</label>
+                    <select class="form-control" id="completed" name="completed" required>
+                        <option value="False" {% if form.completed.value == 'False' %}selected{% endif %}>Pending</option>
+                        <option value="True" {% if form.completed.value == 'True' %}selected{% endif %}>Completed</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Update Task</button>
+            </form>
+
+            <a href="{% url 'lead_detail' lead.id %}" class="btn btn-secondary btn-block mt-3">Back to Lead Details</a>
+        </div>
+    </div>
+</body>
+</html>

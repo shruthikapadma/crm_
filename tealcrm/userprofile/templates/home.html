@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TealCRM Platform</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #ffffff, #f0f4f8);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        color: white;
+    }
+        header {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 70px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+        .navbar a{
+             margin-left: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .navbar a:hover, .dropdown-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .offcanvas {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100%;
+            background-color: #2b3a42;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+        .offcanvas.active {
+            left: 0;
+        }
+        .offcanvas a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .offcanvas a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px;
+        }
+        .offcanvas .close-btn {
+            font-size: 1.5em;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .register {
+            position: relative;
+            margin-left: 15px;
+        }
+        .register .dropdown {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            min-width: 150px;
+            padding: 5px;
+            right: 0;
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+        }
+        .dropdown a {
+            color: white;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        .dropdown a:hover {
+            background-color: #2b3a42;
+        }
+        .register:hover .dropdown {
+            display: block;
+        }
+        main {
+            flex-grow: 1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .intro {
+            margin-bottom: 30px;
+        }
+        .intro h2 {
+            font-size: 2.2em;
+            color:#3d4f5a;
+            margin: 10px 0;
+        }
+        .intro p {
+            font-size: 1.2em;
+            color:#3d4f5a;
+        }
+        .get-started {
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .get-started:hover {
+            background: #3d4f5a;/* Lighter Peach Button Color */
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            flex: 1 1 30%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card h3 {
+            color:#3d4f5a;
+            margin-bottom: 10px;
+        }
+        .overview {
+            margin: 30px auto;
+            max-width: 800px;
+            text-align: center;
+            color: #555;
+        }
+        .overview h3 {
+            font-size: 1.8em;
+            color:#3d4f5a;
+            margin-bottom: 20px;
+        }
+        .overview-features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .overview-feature {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            padding: 20px;
+            flex: 1 1 30%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .overview-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .overview-feature i {
+           color:#3d4f5a;
+            font-size: 1.5em;
+        }
+        .overview-feature h4 {
+            color:#3d4f5a;
+            margin: 15px 0 10px;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            position: relative;
+        }
+        footer p {
+            margin: 0;
+        }
+        .social-icons {
+            margin-top: 10px;
+        }
+        .social-icons a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 1.2em;
+        }
+        .intro p, .feature-card p, .overview p {
+        color: #4d5a5e; /* Light color for readability */
+    }
+        .social-icons a:hover {
+            color:#3d4f5a;
+        }
+
+
+
+         @media (max-width: 600px) {
+            .navbar, .register {
+                display: none;
+            }
+            .hamburger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TealCRM</h1>
+        <div class="navbar">
+            {% if user_ %}
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
+            <a href="{% url 'AboutUs' %}">About Us</a>
+            <a href="{% url 'services' %}">Services</a>
+            <a href="{% url 'ContactUs' %}">Contact Us</a>
+            <div class="register">
+                {% if user_ %}
+                    Welcome, {{ user_.username }}!<a href="{% url 'logout' %}" style="color: #333333">Logout</a>
+                {% else %}
+                    <a href="#">Register</a>
+                    <div class="dropdown">
+                        <a href="{% url 'login' %}">Lead Login</a>
+                        <a href="{% url 'customer_login' %}">Customer Login</a>
+                        <a href="{% url 'signup' %}">Lead Signup</a>
+                        <a href="{% url 'customer_signup' %}">Customer Signup</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+       <div class="hamburger" onclick="toggleOffcanvas()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+        <div class="intro">
+            <h2>Welcome to TealCRM</h2>
+            <p>Your all-in-one solution for effective customer relationship management.</p>
+            <a href="{% url 'signup' %}" class="get-started">Get Started</a>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Customer Management</h3>
+                <p>Centralize customer data for seamless relationship management.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Lead Tracking</h3>
+                <p>Track leads efficiently to maximize conversion rates and drive growth.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Task Automation</h3>
+                <p>Automate repetitive tasks and focus on important customer interactions.</p>
+            </div>
+        </div>
+
+        <div class="overview">
+            <h3>TealCRM Features</h3>
+            <div class="overview-features">
+                <div class="overview-feature">
+                    <i class="fas fa-users"></i>
+                    <h4>Team Collaboration</h4>
+                    <p>Collaborate efficiently across teams to achieve business goals.</p>
+                </div>
+                <div class="overview-feature">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Analytics</h4>
+                    <p>Gain actionable insights with detailed analytics and reporting tools.</p>
+                </div>
+                <div class="overview-feature">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email Integration</h4>
+                    <p>Integrate your email systems for efficient communication with customers.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+<div class="offcanvas" id="offcanvasMenu">
+        <button class="close-btn" onclick="toggleOffcanvas()">&times;</button>
+
+        <a href="{% url 'AboutUs' %}">About Us</a>
+        <a href="{% url 'services' %}">Services</a>
+        <a href="{% url 'ContactUs' %}">Contact Us</a>
+        {% if user_ %}
+            <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'customer_login' %}">Customer Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+            <a href="{% url 'customer_signup' %}">Customer Signup</a>
+        {% endif %}
+    </div>
+    <footer>
+        <p>&copy; 2024 TealCRM</p>
+        <div class="social-icons">
+            <a href="#" class="fab fa-facebook"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+        </div>
+    </footer>
+ <script>
+        function toggleOffcanvas() {
+            const offcanvasMenu = document.getElementById('offcanvasMenu');
+            offcanvasMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

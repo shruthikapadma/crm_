@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TealCRM</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Basic styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f7fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        /* Header styling */
+        header {
+             background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            padding: 5px;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid  #2e3b44;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 10px auto;
+        }
+        header .btn {
+            background-color: white;
+            color:  #2e3b44;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        header .btn:hover {
+            background-color:  #2e3b44;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Section styling */
+        .section {
+            margin-top: 40px;
+        }
+        .section h2 {
+            color: #2e3b44;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        .section p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Team section */
+        .team {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .team-member {
+            text-align: center;
+            margin: 15px;
+            width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .team-member h4 {
+            color: #333;
+            margin: 10px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .team-member p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        /* Contact section */
+        .contact-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+        .contact-section p {
+            color: #555;
+            font-size: 1.2rem;
+        }
+        .contact-section strong {
+            color:  #2e3b44;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div>
+            <h1>About Us</h1>
+            <p>Discover our mission, values, and the dedicated team that brings TealCRM to life. We’re here to help your business grow!</p>
+        </div>
+
+    </header>
+
+    <div class="container">
+        <!-- Our Mission Section -->
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>Our mission is to empower businesses with the tools they need to nurture customer relationships and drive success. With TealCRM, we provide solutions that help you understand your customers, automate tasks, and build stronger connections.</p>
+        </div>
+
+        <!-- Our Values Section -->
+        <div class="section">
+            <h2>Our Values</h2>
+            <p>We believe in innovation, transparency, and a deep commitment to customer success. Our values guide everything we do, and we are dedicated to providing our clients with a reliable, user-friendly platform for growth.</p>
+        </div>
+
+        <!-- Our Story Section -->
+        <div class="section">
+            <h2>Our Story</h2>
+            <p>Founded in 2020, TealCRM started as a small project to simplify customer management. Today, we’ve grown into a powerful CRM platform that helps businesses of all sizes build lasting relationships with their customers. Our story is just beginning!</p>
+        </div>
+
+        <!-- Meet the Team Section -->
+        <div class="section">
+            <h2>Meet the Team</h2>
+            <div class="team">
+                <div class="team-member">
+                    <img src="{% static 'image/Screenshot 2024-11-08 003214.png' %}" alt="Munna Kumar">
+                    <h4>Munna Kumar</h4>
+                    <p>CEO & Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'image/WhatsApp Image 2024-11-08 at 00.39.43_43d32bdd.jpg' %}" alt="Akhil Panvi">
+                    <h4>Akhil Panvi</h4>
+                    <p>Chief Technology Officer</p>
+                </div>
+                <div class="team-member">
+                    <img src="{% static 'image/thisisengineering-TXxiFuQLBKQ-unsplash.jpg' %}" alt="Shruthika Padma">
+                    <h4>Shruthika Padma</h4>
+                    <p>Head of Customer Success</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, we’re here to help. Don’t hesitate to reach out!</p>
+            <p><strong>Email:</strong> munnakushw7@gmail.com</p>
+            <p><strong>Phone:</strong> +91- 6207693788</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 TealCRM. All rights reserved.</p>
+        <div>
+            <a href="{% url 'home' %}" style="color: white; text-decoration: none; padding: 10px;">Home</a> |
+            <a href="{% url 'AboutUs' %}" style="color: white; text-decoration: none; padding: 10px;">About Us</a> |
+            <a href="{% url 'services' %}" style="color: white; text-decoration: none; padding: 10px;">Services</a> |
+            <a href="{% url 'ContactUs' %}" style="color: white; text-decoration: none; padding: 10px;">Contact Us</a>
+        </div>
+    </footer>
+</body>
+</html>

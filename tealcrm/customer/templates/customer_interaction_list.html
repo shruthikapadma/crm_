@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Interaction List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .customer-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .customer-list th, .customer-list td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .customer-list th {
+            background-color: #00796b;
+            color: white;
+        }
+        .customer-list tr:hover {
+            background-color: #f1f1f1;
+        }
+        .action-button {
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+        .view-button {
+            background-color: #2196F3;
+        }
+        .view-button:hover {
+            background-color: #1976D2;
+        }
+        .btn-warning {
+            background-color: #FFC107;
+            padding: 6px 10px;
+        }
+        .btn-danger {
+            background-color: #F44336;
+            padding: 6px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Interaction List</h1>
+        <table class="customer-list">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>View Interaction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for interaction in interactions %}
+                <tr>
+                    <td>{{ customer.name }}</td>
+                    <td>
+                        <a href="{% url 'view_customer_interaction' customer.id %}" class="action-button view-button">View Interaction</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

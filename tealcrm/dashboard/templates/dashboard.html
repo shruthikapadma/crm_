@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TealCRM</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fc;
+            font-family: Arial, sans-serif;
+        }
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .navbar-toggler {
+            background-color: #4caf50;
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"%3E%3Cpath stroke="rgba%28255, 255, 255, 0.7%29" stroke-width="2" d="M4 7h22M4 15h22M4 23h22" /%3E%3C/svg%3E');
+        }
+        .navbar-nav {
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar-nav .nav-item {
+            margin: 0 15px;
+        }
+        .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #4caf50;
+            transition: transform 0.3s, color 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link:hover {
+            color: #fff;
+            transform: scale(1.1);
+            background-color: #3e8e41;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container Styling */
+        .container {
+            margin-top: 40px;
+        }
+        h3 {
+            color: #2e3b44;
+            font-weight: bold;
+        }
+        .lead-item {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .lead-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+        .lead-item h5 {
+            color: #2e3b44;
+            font-weight: bold;
+        }
+        .lead-actions .btn {
+            margin-right: 10px;
+        }
+        .lead-actions .btn-primary, .add-lead {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: #fff;
+            border: none;
+            transition: background 0.3s;
+        }
+        .lead-actions .btn-primary:hover, .add-lead:hover {
+            background: linear-gradient(135deg, #1c262c, #2e3b44);
+        }
+        .add-lead {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+        }
+
+        /* Footer Styling */
+        footer {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        .btn-warning {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .btn-warning:hover {
+            background-color: #3e8e41;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">TealCRM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'create_lead' %}">Add Lead</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'services' %}">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'ContactUs' %}">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'AboutUs' %}">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h3 class="text-center">Welcome to the Lead Dashboard</h3>
+
+        <h4 class="mt-4">All Leads</h4>
+        <div class="row">
+            {% for lead in leads %}
+                <div class="col-md-4">
+                    <div class="lead-item">
+                        <h5>{{ lead.first_name }} {{ lead.last_name }}</h5>
+                        <p><strong>Email:</strong> {{ lead.email }}</p>
+                        <p><strong>Phone:</strong> {{ lead.phone }}</p>
+                        <p><strong>Company:</strong> {{ lead.company }}</p>
+                        <div class="lead-actions">
+                            <a class="btn btn-primary" href="{% url 'lead_detail' lead.id %}">View Details</a>
+                            <a class="btn btn-warning" href="{% url 'edit_lead' lead.id %}">Edit</a>
+                            <a class="btn btn-danger" href="{% url 'delete_lead' lead.id %}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 text-center">
+                    <p>No leads available.</p>
+                    <a class="add-lead" href="{% url 'create_lead' %}">Add Lead</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    {% include 'footer.html' %}
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

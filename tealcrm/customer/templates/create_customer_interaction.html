@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Interaction</title>
+
+</head>
+<body>
+    <h1>Add Interaction for {{ customer.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="interaction_type">Interaction Type:</label>
+        <select name="interaction_type" id="interaction_type" required>
+            <option value="Call">Call</option>
+            <option value="Email">Email</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Other">Other</option>
+        </select>
+        <br>
+        <label for="notes">Notes:</label>
+        <textarea name="notes" id="notes" rows="4" required></textarea>
+        <br>
+        <button type="submit" class="btn btn-success">Add Interaction</button>
+    </form>
+</body>
+</html>
